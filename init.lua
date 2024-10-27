@@ -25,6 +25,21 @@ require("lazy").setup({
   { import = "plugins" },
 }, lazy_config)
 
+-- Load NvimTree configuration
+require'nvim-tree'.setup {
+    filters = {
+        dotfiles = true, 
+    },
+}
+
+-- Reset cursor when leaving Vim
+vim.cmd([[
+augroup ResetCursor
+  autocmd!
+  autocmd VimLeave * :silent !echo -ne "\033[ q"  -- Reset cursor to block
+augroup END
+]])
+
 -- load theme
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
